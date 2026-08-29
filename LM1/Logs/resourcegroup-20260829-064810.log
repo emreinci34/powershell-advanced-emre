@@ -1,0 +1,194 @@
+**********************
+PowerShell transcript start
+Start time: 20260829064810
+Username: PA-emre\student
+RunAs User: PA-emre\student
+Configuration Name: 
+Machine: PA-emre (Microsoft Windows NT 10.0.26100.0)
+Host Application: C:\Program Files\WindowsApps\Microsoft.PowerShell_7.6.5.0_x64__8wekyb3d8bbwe\pwsh.dll -noexit -command try { . "c:\Program Files\Microsoft VS Code\110a328ea5\resources\app\out\vs\workbench\contrib\terminal\common\scripts\shellIntegration.ps1" } catch {}
+Process ID: 2840
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26100
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\powershell-advanced-emre\LM1\Logs\resourcegroup-20260829-064810.log
+DEBUG: Step 1: Transcript path is C:\powershell-advanced-emre\LM1\Logs\resourcegroup-20260829-064810.log
+DEBUG: Step 2: Resource group name is 'lm2-emre-debug-rg' and location is 'centralus'.
+Creating Azure resource group: lm2-emre-debug-rg
+DEBUG: Step 3: Executing New-AzResourceGroup with ErrorAction Stop.
+DEBUG: 6:48:10 AM - [ConfigManager] Got nothing from [DisplaySecretsWarning], Module = [], Cmdlet = []. Returning default value [True].
+DEBUG: 6:48:10 AM - NewAzureResourceGroupCmdlet begin processing with ParameterSet '__AllParameterSets'.
+DEBUG: 6:48:10 AM - using account id '25397679@nwtc.edu'...
+DEBUG: 6:48:10 AM - [ConfigManager] Got nothing from [DisplayBreakingChangeWarning], Module = [Az.Resources], Cmdlet = [New-AzResourceGroup]. Returning default value [True].
+DEBUG: [Common.Authentication]: Authenticating using Account: '25397679@nwtc.edu', environment: 'AzureCloud', tenant: 'c1ea9bb8-2b09-4a9f-946c-947b35ae5191'
+DEBUG: 6:48:10 AM - [ConfigManager] Got nothing from [DisableInstanceDiscovery], Module = [], Cmdlet = []. Returning default value [False].
+DEBUG: 6:48:10 AM - [ConfigManager] Got [False] from [EnableLoginByWam], Module = [], Cmdlet = [].
+DEBUG: 6:48:10 AM - [SilentAuthenticator] Calling SharedTokenCacheCredential.GetTokenAsync - TenantId:'c1ea9bb8-2b09-4a9f-946c-947b35ae5191', Scopes:'https://management.core.windows.net//.default', AuthorityHost:'https://login.microsoftonline.com/', UserId:'25397679@nwtc.edu'
+DEBUG: SharedTokenCacheCredential.GetToken invoked. Scopes: [ https://management.core.windows.net//.default ] ParentRequestId:
+DEBUG: False MSAL 4.84.0.0 MSAL.CoreCLR .NET 10.0.11 Microsoft Windows 10.0.26100 [2026-08-29 06:48:10Z - a8524da3-7833-4c4c-8f7d-4f1ae1fcacad] ==== GetAccounts started - GetAccounts ====
+DEBUG: False MSAL 4.84.0.0 MSAL.CoreCLR .NET 10.0.11 Microsoft Windows 10.0.26100 [2026-08-29 06:48:10Z - a8524da3-7833-4c4c-8f7d-4f1ae1fcacad] Account id filter: False
+DEBUG: False MSAL 4.84.0.0 MSAL.CoreCLR .NET 10.0.11 Microsoft Windows 10.0.26100 [2026-08-29 06:48:10Z] [Internal cache] Clearing user token cache accessor.
+DEBUG: False MSAL 4.84.0.0 MSAL.CoreCLR .NET 10.0.11 Microsoft Windows 10.0.26100 [2026-08-29 06:48:10Z] [Internal cache] Total number of cache partitions found while getting refresh tokens: 1. PartitionKey  False
+DEBUG: False MSAL 4.84.0.0 MSAL.CoreCLR .NET 10.0.11 Microsoft Windows 10.0.26100 [2026-08-29 06:48:10Z] [Internal cache] Total number of cache partitions found while getting accounts: 1. PartitionKey  False
+DEBUG: False MSAL 4.84.0.0 MSAL.CoreCLR .NET 10.0.11 Microsoft Windows 10.0.26100 [2026-08-29 06:48:10Z - a8524da3-7833-4c4c-8f7d-4f1ae1fcacad] IsLegacyAdalCacheEnabled: yes
+DEBUG: False MSAL 4.84.0.0 MSAL.CoreCLR .NET 10.0.11 Microsoft Windows 10.0.26100 [2026-08-29 06:48:10Z - a8524da3-7833-4c4c-8f7d-4f1ae1fcacad] [Region discovery] Not using a regional authority.
+DEBUG: False MSAL 4.84.0.0 MSAL.CoreCLR .NET 10.0.11 Microsoft Windows 10.0.26100 [2026-08-29 06:48:10Z - a8524da3-7833-4c4c-8f7d-4f1ae1fcacad] [Region discovery] Not using a regional authority.
+DEBUG: False MSAL 4.84.0.0 MSAL.CoreCLR .NET 10.0.11 Microsoft Windows 10.0.26100 [2026-08-29 06:48:10Z - a8524da3-7833-4c4c-8f7d-4f1ae1fcacad] IsLegacyAdalCacheEnabled: yes
+DEBUG: False MSAL 4.84.0.0 MSAL.CoreCLR .NET 10.0.11 Microsoft Windows 10.0.26100 [2026-08-29 06:48:10Z - a8524da3-7833-4c4c-8f7d-4f1ae1fcacad] IsLegacyAdalCacheEnabled: yes
+DEBUG: False MSAL 4.84.0.0 MSAL.CoreCLR .NET 10.0.11 Microsoft Windows 10.0.26100 [2026-08-29 06:48:10Z] Found 1 cache accounts and 0 broker accounts
+DEBUG: False MSAL 4.84.0.0 MSAL.CoreCLR .NET 10.0.11 Microsoft Windows 10.0.26100 [2026-08-29 06:48:10Z] Returning 1 accounts
+DEBUG: False MSAL 4.84.0.0 MSAL.CoreCLR .NET 10.0.11 Microsoft Windows 10.0.26100 [2026-08-29 06:48:10Z - 744aeea5-2d89-44c6-9baf-74cf22cbe39a] MSAL MSAL.CoreCLR with assembly version '4.84.0.0'. CorrelationId(744aeea5-2d89-44c6-9baf-74cf22cbe39a)
+DEBUG: False MSAL 4.84.0.0 MSAL.CoreCLR .NET 10.0.11 Microsoft Windows 10.0.26100 [2026-08-29 06:48:10Z - 744aeea5-2d89-44c6-9baf-74cf22cbe39a] === AcquireTokenSilent Parameters ===
+DEBUG: False MSAL 4.84.0.0 MSAL.CoreCLR .NET 10.0.11 Microsoft Windows 10.0.26100 [2026-08-29 06:48:10Z - 744aeea5-2d89-44c6-9baf-74cf22cbe39a] LoginHint provided: False
+DEBUG: False MSAL 4.84.0.0 MSAL.CoreCLR .NET 10.0.11 Microsoft Windows 10.0.26100 [2026-08-29 06:48:10Z - 744aeea5-2d89-44c6-9baf-74cf22cbe39a] Account provided: True
+DEBUG: False MSAL 4.84.0.0 MSAL.CoreCLR .NET 10.0.11 Microsoft Windows 10.0.26100 [2026-08-29 06:48:10Z - 744aeea5-2d89-44c6-9baf-74cf22cbe39a] ForceRefresh: False
+DEBUG: False MSAL 4.84.0.0 MSAL.CoreCLR .NET 10.0.11 Microsoft Windows 10.0.26100 [2026-08-29 06:48:10Z - 744aeea5-2d89-44c6-9baf-74cf22cbe39a] 
+=== Request Data ===
+Authority Provided? - True
+Scopes - https://management.core.windows.net//.default
+Extra Query Params Keys (space separated) - 
+ApiId - AcquireTokenSilent
+IsConfidentialClient - False
+SendX5C - False
+LoginHint ? False
+IsBrokerConfigured - False
+HomeAccountId - False
+CorrelationId - 744aeea5-2d89-44c6-9baf-74cf22cbe39a
+UserAssertion set: False
+LongRunningOboCacheKey set: False
+Region configured: 
+FMI Path: 
+Credential FMI Path:
+DEBUG: False MSAL 4.84.0.0 MSAL.CoreCLR .NET 10.0.11 Microsoft Windows 10.0.26100 [2026-08-29 06:48:10Z - 744aeea5-2d89-44c6-9baf-74cf22cbe39a] === Token Acquisition (SilentRequest) started:
+	 Scopes: https://management.core.windows.net//.default
+	Authority Host: login.microsoftonline.com
+DEBUG: False MSAL 4.84.0.0 MSAL.CoreCLR .NET 10.0.11 Microsoft Windows 10.0.26100 [2026-08-29 06:48:10Z] [Internal cache] Clearing user token cache accessor.
+DEBUG: False MSAL 4.84.0.0 MSAL.CoreCLR .NET 10.0.11 Microsoft Windows 10.0.26100 [2026-08-29 06:48:10Z - 744aeea5-2d89-44c6-9baf-74cf22cbe39a] [Internal cache] Total number of cache partitions found while getting access tokens: 1
+DEBUG: False MSAL 4.84.0.0 MSAL.CoreCLR .NET 10.0.11 Microsoft Windows 10.0.26100 [2026-08-29 06:48:10Z - 744aeea5-2d89-44c6-9baf-74cf22cbe39a] [FindAccessTokenAsync] Discovered 1 access tokens in cache using partition key: a4e99c5e-0275-427b-b760-fa113fde8ac0.00d501fb-5a68-42d6-b3d8-e8b2f16906d4
+DEBUG: False MSAL 4.84.0.0 MSAL.CoreCLR .NET 10.0.11 Microsoft Windows 10.0.26100 [2026-08-29 06:48:10Z - 744aeea5-2d89-44c6-9baf-74cf22cbe39a] [Region discovery] Not using a regional authority.
+DEBUG: False MSAL 4.84.0.0 MSAL.CoreCLR .NET 10.0.11 Microsoft Windows 10.0.26100 [2026-08-29 06:48:10Z - 744aeea5-2d89-44c6-9baf-74cf22cbe39a] Access token is not expired. Returning the found cache entry. [Current time (08/29/2026 06:48:10) - Expiration Time (08/29/2026 08:02:00 +00:00) - Extended Expiration Time (08/29/2026 08:02:00 +00:00)]
+DEBUG: False MSAL 4.84.0.0 MSAL.CoreCLR .NET 10.0.11 Microsoft Windows 10.0.26100 [2026-08-29 06:48:10Z - 744aeea5-2d89-44c6-9baf-74cf22cbe39a] Returning access token found in cache. RefreshOn exists ? False
+DEBUG: False MSAL 4.84.0.0 MSAL.CoreCLR .NET 10.0.11 Microsoft Windows 10.0.26100 [2026-08-29 06:48:10Z - 744aeea5-2d89-44c6-9baf-74cf22cbe39a] [Region discovery] Not using a regional authority.
+DEBUG: False MSAL 4.84.0.0 MSAL.CoreCLR .NET 10.0.11 Microsoft Windows 10.0.26100 [2026-08-29 06:48:10Z - 744aeea5-2d89-44c6-9baf-74cf22cbe39a] 
+	=== Token Acquisition finished successfully:
+DEBUG: False MSAL 4.84.0.0 MSAL.CoreCLR .NET 10.0.11 Microsoft Windows 10.0.26100 [2026-08-29 06:48:10Z - 744aeea5-2d89-44c6-9baf-74cf22cbe39a]  AT expiration time: 8/29/2026 8:02:00 AM +00:00, scopes: https://management.core.windows.net//.default https://management.core.windows.net//user_impersonation. source: Cache
+DEBUG: False MSAL 4.84.0.0 MSAL.CoreCLR .NET 10.0.11 Microsoft Windows 10.0.26100 [2026-08-29 06:48:10Z - 744aeea5-2d89-44c6-9baf-74cf22cbe39a] 
+[LogMetricsFromAuthResult] Cache Refresh Reason: NotApplicable
+[LogMetricsFromAuthResult] DurationInCacheInMs: 0
+[LogMetricsFromAuthResult] DurationTotalInMs: 20
+[LogMetricsFromAuthResult] DurationInHttpInMs: 0
+DEBUG: False MSAL 4.84.0.0 MSAL.CoreCLR .NET 10.0.11 Microsoft Windows 10.0.26100 [2026-08-29 06:48:10Z - 744aeea5-2d89-44c6-9baf-74cf22cbe39a] TokenEndpoint: ****
+DEBUG: SharedTokenCacheCredential.GetToken succeeded. Scopes: [ https://management.core.windows.net//.default ] ParentRequestId:  ExpiresOn: 2026-08-29T08:02:00.0000000+00:00
+DEBUG: [Common.Authentication]: Received token with LoginType 'User', Tenant: 'c1ea9bb8-2b09-4a9f-946c-947b35ae5191', UserId: '25397679@nwtc.edu'
+DEBUG: ============================ HTTP REQUEST ============================
+
+HTTP Method:
+HEAD
+
+Absolute Uri:
+https://management.azure.com/subscriptions/ab89f42f-7de3-4e7c-ab2d-6e04f9ea1955/resourcegroups/lm2-emre-debug-rg?api-version=2021-04-01
+
+Headers:
+Accept-Language               : en-US
+x-ms-client-request-id        : 342d2782-9ef2-44a0-a14d-90699d428aa1
+
+Body:
+DEBUG: [AcquirePolicyTokenHandler] Intercept HEAD https://management.azure.com/subscriptions/ab89f42f-7de3-4e7c-ab2d-6e04f9ea1955/resourcegroups/lm2-emre-debug-rg?api-version=2021-04-01
+DEBUG: [AcquirePolicyTokenHandler] Skip: verb not allowed for token acquisition.
+DEBUG: ============================ HTTP RESPONSE ============================
+
+Status Code:
+NotFound
+
+Headers:
+Cache-Control                 : no-cache
+Pragma                        : no-cache
+x-ms-failure-cause            : gateway
+x-ms-ratelimit-remaining-subscription-reads: 249
+x-ms-ratelimit-remaining-subscription-global-reads: 3749
+x-ms-request-id               : ed1f76b8-2dbb-4d86-a895-1c2f5c991f15
+x-ms-correlation-request-id   : ed1f76b8-2dbb-4d86-a895-1c2f5c991f15
+x-ms-routing-request-id       : CENTRALUS:20260829T064811Z:ed1f76b8-2dbb-4d86-a895-1c2f5c991f15
+Strict-Transport-Security     : max-age=31536000; includeSubDomains
+X-Content-Type-Options        : nosniff
+X-Cache                       : CONFIG_NOCACHE
+X-MSEdge-Ref                  : Ref A: F395134A2CD44EA591882A0BD2DAC125 Ref B: DM2AA1091214051 Ref C: 2026-08-29T06:48:10Z
+Date                          : Sat, 29 Aug 2026 06:48:10 GMT
+
+Body:
+DEBUG: ============================ HTTP REQUEST ============================
+
+HTTP Method:
+PUT
+
+Absolute Uri:
+https://management.azure.com/subscriptions/ab89f42f-7de3-4e7c-ab2d-6e04f9ea1955/resourcegroups/lm2-emre-debug-rg?api-version=2021-04-01
+
+Headers:
+Accept-Language               : en-US
+x-ms-client-request-id        : 342d2782-9ef2-44a0-a14d-90699d428aa1
+
+Body:
+{
+  "location": "centralus"
+}
+DEBUG: [AcquirePolicyTokenHandler] Intercept PUT https://management.azure.com/subscriptions/ab89f42f-7de3-4e7c-ab2d-6e04f9ea1955/resourcegroups/lm2-emre-debug-rg?api-version=2021-04-01
+DEBUG: [AcquirePolicyTokenHandler] Skip: user did not request token (no -AcquirePolicyToken).
+DEBUG: ============================ HTTP RESPONSE ============================
+
+Status Code:
+Created
+
+Headers:
+Cache-Control                 : no-cache
+Pragma                        : no-cache
+x-ms-ratelimit-remaining-subscription-writes: 199
+x-ms-ratelimit-remaining-subscription-global-writes: 2999
+x-ms-request-id               : 6679100e-8923-487e-9c23-bd5aa336d155
+x-ms-correlation-request-id   : 6679100e-8923-487e-9c23-bd5aa336d155
+x-ms-routing-request-id       : CENTRALUS:20260829T064811Z:6679100e-8923-487e-9c23-bd5aa336d155
+Strict-Transport-Security     : max-age=31536000; includeSubDomains
+X-Content-Type-Options        : nosniff
+X-Cache                       : CONFIG_NOCACHE
+X-MSEdge-Ref                  : Ref A: 0A7F1FB29DA848029AE98FF94345877D Ref B: DM2AA1091214051 Ref C: 2026-08-29T06:48:11Z
+Date                          : Sat, 29 Aug 2026 06:48:10 GMT
+
+Body:
+{
+  "id": "/subscriptions/ab89f42f-7de3-4e7c-ab2d-6e04f9ea1955/resourceGroups/lm2-emre-debug-rg",
+  "name": "lm2-emre-debug-rg",
+  "type": "Microsoft.Resources/resourceGroups",
+  "location": "centralus",
+  "properties": {
+    "provisioningState": "Succeeded"
+  }
+}
+DEBUG: 6:48:11 AM - [ConfigManager] Got nothing from [DisplaySecretsWarning], Module = [], Cmdlet = []. Returning default value [True].
+
+ResourceGroupName : lm2-emre-debug-rg
+Location          : centralus
+ProvisioningState : Succeeded
+Tags              : 
+ResourceId        : /subscriptions/ab89f42f-7de3-4e7c-ab2d-6e04f9ea1955/resourceGroups/lm2-emre-debug-rg
+
+DEBUG: 6:48:11 AM - [ConfigManager] Got nothing from [DisplayRegionIdentified], Module = [], Cmdlet = []. Returning default value [True].
+DEBUG: 6:48:11 AM - [ConfigManager] Got nothing from [CheckForUpgrade], Module = [], Cmdlet = []. Returning default value [True].
+DEBUG: 6:48:11 AM - No authentication telemetry is found for the current cmdlet with Id 342d2782-9ef2-44a0-a14d-90699d428aa1.
+DEBUG: AzureQoSEvent:  Module: Az.Resources:10.1.0; CommandName: New-AzResourceGroup; PSVersion: 7.6.5; IsSuccess: True; Duration: 00:00:01.2398380; SanitizeDuration: 00:00:00.0000883
+DEBUG: 6:48:11 AM - [ConfigManager] Got nothing from [EnableDataCollection], Module = [], Cmdlet = []. Returning default value [True].
+DEBUG: 6:48:12 AM - NewAzureResourceGroupCmdlet end processing.
+DEBUG: Step 4: The New-AzResourceGroup command completed without a terminating error.
+Resource group created successfully.
+DEBUG: The Finally block will run regardless of success or failure.
+Resource group creation attempt completed.
+Transcript location: C:\powershell-advanced-emre\LM1\Logs\resourcegroup-20260829-064810.log
+**********************
+PowerShell transcript end
+End time: 20260829064812
+**********************

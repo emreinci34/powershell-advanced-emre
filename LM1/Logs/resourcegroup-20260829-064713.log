@@ -1,0 +1,41 @@
+**********************
+PowerShell transcript start
+Start time: 20260829064713
+Username: PA-emre\student
+RunAs User: PA-emre\student
+Configuration Name: 
+Machine: PA-emre (Microsoft Windows NT 10.0.26100.0)
+Host Application: C:\Program Files\WindowsApps\Microsoft.PowerShell_7.6.5.0_x64__8wekyb3d8bbwe\pwsh.dll -noexit -command try { . "c:\Program Files\Microsoft VS Code\110a328ea5\resources\app\out\vs\workbench\contrib\terminal\common\scripts\shellIntegration.ps1" } catch {}
+Process ID: 2840
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26100
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\powershell-advanced-emre\LM1\Logs\resourcegroup-20260829-064713.log
+VERBOSE: Step 1: Transcript logging has started.
+VERBOSE: Step 2: Preparing resource group deployment information.
+Creating Azure resource group: lm2-emre-verbose-rg
+VERBOSE: Step 3: Sending the resource group creation request to Azure.
+VERBOSE: 6:47:20 AM - Created resource group 'lm2-emre-verbose-rg' in location 'centralus'
+
+ResourceGroupName : lm2-emre-verbose-rg
+Location          : centralus
+ProvisioningState : Succeeded
+Tags              : 
+ResourceId        : /subscriptions/ab89f42f-7de3-4e7c-ab2d-6e04f9ea1955/resourceGroups/lm2-emre-verbose-rg
+
+VERBOSE: Step 4: Azure confirmed the resource group operation.
+Resource group created successfully.
+VERBOSE: Final step: Completing the script and stopping the transcript.
+Resource group creation attempt completed.
+Transcript location: C:\powershell-advanced-emre\LM1\Logs\resourcegroup-20260829-064713.log
+**********************
+PowerShell transcript end
+End time: 20260829064720
+**********************
