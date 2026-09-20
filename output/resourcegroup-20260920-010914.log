@@ -1,0 +1,58 @@
+**********************
+PowerShell transcript start
+Start time: 20260920010914
+Username: PA-emre\student
+RunAs User: PA-emre\student
+Configuration Name: 
+Machine: PA-emre (Microsoft Windows NT 10.0.26100.0)
+Host Application: C:\Program Files\WindowsApps\Microsoft.PowerShell_7.6.6.0_x64__8wekyb3d8bbwe\pwsh.dll -NoProfile -ExecutionPolicy Bypass -Command Import-Module 'c:\Users\student\.vscode\extensions\ms-vscode.powershell-2025.4.0\modules\PowerShellEditorServices\PowerShellEditorServices.psd1'; Start-EditorServices -HostName 'Visual Studio Code Host' -HostProfileId 'Microsoft.VSCode' -HostVersion '2025.4.0' -BundledModulesPath 'c:\Users\student\.vscode\extensions\ms-vscode.powershell-2025.4.0\modules' -EnableConsoleRepl -StartupBanner "PowerShell Extension v2025.4.0
+Copyright (c) Microsoft Corporation.
+
+https://aka.ms/vscode-powershell
+Type 'help' to get help.
+" -LogLevel 'Warning' -LogPath 'c:\Users\student\AppData\Roaming\Code\logs\20260920T004616\window1\exthost\ms-vscode.powershell' -SessionDetailsPath 'c:\Users\student\AppData\Roaming\Code\User\globalStorage\ms-vscode.powershell\sessions\PSES-VSCode-7688-934798.json' -FeatureFlags @() 
+Process ID: 7996
+PSVersion: 7.6.6
+PSEdition: Core
+GitCommitId: 7.6.6
+OS: Microsoft Windows 10.0.26100
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\powershell-advanced-emre\output\resourcegroup-20260920-010914.log
+Starting Azure resource group processing.
+Creating Azure resource group: RG-1005
+Resource group created successfully: RG-1005
+
+ResourceGroupName : RG-1005
+Location          : centralus
+Status            : Created
+Tags              : {[Environment, Test], [Department, IT]}
+Timestamp         : 9/20/2026 1:09:14 AM
+
+Creating Azure resource group: RG-1006
+Resource group created successfully: RG-1006
+ResourceGroupName : RG-1006
+Location          : centralus
+Status            : Created
+Tags              : {[Environment, Test], [Department, IT]}
+Timestamp         : 9/20/2026 1:09:15 AM
+
+Creating Azure resource group: RG-1007
+Resource group created successfully: RG-1007
+ResourceGroupName : RG-1007
+Location          : centralus
+Status            : Created
+Tags              : {[Environment, Test], [Department, IT]}
+Timestamp         : 9/20/2026 1:09:16 AM
+
+Resource group processing completed.
+Total items processed: 3
+Transcript location: C:\powershell-advanced-emre\output\resourcegroup-20260920-010914.log
+**********************
+PowerShell transcript end
+End time: 20260920010917
+**********************

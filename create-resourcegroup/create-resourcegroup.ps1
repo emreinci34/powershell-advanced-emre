@@ -1,17 +1,26 @@
 function New-TestResourceGroup {
     <#
     .SYNOPSIS
-    Creates a new Azure resource group in the Central US region.
+    Creates Azure resource groups in the Central US region.
 
     .DESCRIPTION
-    Creates an Azure resource group using the supplied ResourceGroupName.
-    The function accepts pipeline input, validates parameters, applies tags,
-    supports WhatIf and Confirm, handles errors, records its activity, and
-    returns structured output.
+    Creates one or more Azure resource groups using either a supplied resource
+    group name or project IDs. When ProjectID is used, the function automatically
+    creates names in the RG-<ProjectID> format.
+
+    The function supports pipeline processing through Begin, Process, and End
+    blocks. It validates parameters, applies tags, supports WhatIf and Confirm,
+    handles errors, records transcript logs, returns structured output, and
+    displays end-of-run execution statistics.
 
     .PARAMETER ResourceGroupName
-    Specifies the Azure resource group name. The value must contain
-    between 1 and 90 characters and can be received from the pipeline.
+    Specifies a complete Azure resource group name. The value must contain
+    between 1 and 90 characters.
+
+    .PARAMETER ProjectID
+    Specifies a numeric project ID. The function converts the value into a
+    resource group name using the RG-<ProjectID> naming convention. This
+    parameter accepts multiple values through the pipeline.
 
     .PARAMETER Tags
     Specifies identifying tags for the resource group. If no tags are
@@ -19,39 +28,50 @@ function New-TestResourceGroup {
     environment.
 
     .EXAMPLE
-    New-TestResourceGroup -ResourceGroupName "lm3-emre-default-rg"
+    New-TestResourceGroup -ResourceGroupName "lm4-emre-name-rg"
 
-    Creates an Azure resource group using the default tags.
-
-    .EXAMPLE
-    New-TestResourceGroup -ResourceGroupName "lm3-emre-dev-rg" -Tags @{
-        Department  = "Dev"
-        Environment = "Development"
-    }
-
-    Creates an Azure resource group using custom tags.
+    Creates an Azure resource group using the supplied name.
 
     .EXAMPLE
-    "lm3-emre-pipeline-rg" | New-TestResourceGroup
+    New-TestResourceGroup -ProjectID 1001
 
-    Sends the resource group name to the function through the pipeline.
-
-    .EXAMPLE
-    "lm3-emre-whatif-rg" | New-TestResourceGroup -WhatIf
-
-    Shows what the function would do without creating the resource group.
+    Creates an Azure resource group named RG-1001.
 
     .EXAMPLE
-    "lm3-emre-confirm-rg" | New-TestResourceGroup -Confirm
+    "1001", "1002", "1003" | New-TestResourceGroup
 
-    Requests confirmation before creating the resource group.
+    Processes three project IDs from the pipeline.
+
+    .EXAMPLE
+    Get-Content .\ResourceGroups.txt | New-TestResourceGroup
+
+    Reads project IDs from a text file and processes each value.
+
+    .EXAMPLE
+    "1001", "1002", "1003" | New-TestResourceGroup -WhatIf
+
+    Previews the operations and reports all three requests as skipped.
     #>
 
-    [CmdletBinding(SupportsShouldProcess = $true)]
+    [CmdletBinding(
+        SupportsShouldProcess = $true,
+        DefaultParameterSetName = "ResourceGroupName"
+    )]
     param(
-        [Parameter(Mandatory, ValueFromPipeline)]
+        [Parameter(
+            Mandatory,
+            ParameterSetName = "ResourceGroupName"
+        )]
         [ValidateLength(1, 90)]
         [string]$ResourceGroupName,
+
+        [Parameter(
+            Mandatory,
+            ValueFromPipeline,
+            ParameterSetName = "ProjectID"
+        )]
+        [ValidateRange(1, 999999)]
+        [int]$ProjectID,
 
         [hashtable]$Tags = @{
             Department  = "IT"
@@ -59,72 +79,110 @@ function New-TestResourceGroup {
         }
     )
 
-    # Step 1: Prepare the transcript location.
-    $repositoryRoot = Split-Path -Path $PSScriptRoot -Parent
-    $logFolder = Join-Path -Path $repositoryRoot -ChildPath "output"
+    begin {
+        # Initialize execution statistics.
+        $processedCount = 0
+        $createdCount = 0
+        $skippedCount = 0
+        $errorCount = 0
 
-    if (-not (Test-Path -Path $logFolder)) {
-        New-Item -Path $logFolder -ItemType Directory | Out-Null
-    }
+        # Prepare the transcript location.
+        $repositoryRoot = Split-Path -Path $PSScriptRoot -Parent
+        $logFolder = Join-Path -Path $repositoryRoot -ChildPath "output"
 
-    $timestamp = Get-Date -Format "yyyyMMdd-HHmmss"
-    $transcriptPath = Join-Path -Path $logFolder -ChildPath "resourcegroup-$timestamp.log"
-
-    Start-Transcript -Path $transcriptPath
-
-    Write-Verbose "Step 1: Transcript logging has started."
-    Write-Debug "Step 1: Transcript path is $transcriptPath"
-
-    # Create a structured result object before the Try/Catch statement.
-    $result = [PSCustomObject]@{
-        ResourceGroupName = $ResourceGroupName
-        Location          = "centralus"
-        Status            = "Not Created"
-        Tags              = $Tags
-        Timestamp         = Get-Date
-    }
-
-    try {
-        # Step 2: Prepare and validate the deployment information.
-        Write-Verbose "Step 2: Preparing resource group deployment information."
-        Write-Debug "Step 2: Resource group name is '$ResourceGroupName' and location is 'centralus'."
-        Write-Debug "Step 2: Resource group tags are $($Tags | Out-String)."
-
-        if ($PSCmdlet.ShouldProcess(
-                "Resource Group '$ResourceGroupName'",
-                "Create"
-            )) {
-            Write-Host "Creating Azure resource group: $ResourceGroupName"
-
-            # Step 3: Submit the resource group request to Azure.
-            Write-Verbose "Step 3: Sending the resource group creation request to Azure."
-            Write-Debug "Step 3: Executing New-AzResourceGroup with tags and ErrorAction Stop."
-
-            New-AzResourceGroup `
-                -Name $ResourceGroupName `
-                -Location "centralus" `
-                -Tags $Tags `
-                -ErrorAction Stop | Out-Null
-
-            $result.Status = "Created"
-
-            Write-Verbose "Step 4: Azure confirmed the resource group operation."
-            Write-Debug "Step 4: The New-AzResourceGroup command completed without a terminating error."
-            Write-Host "Resource group created successfully."
+        if (-not (Test-Path -Path $logFolder)) {
+            New-Item -Path $logFolder -ItemType Directory | Out-Null
         }
+
+        $timestamp = Get-Date -Format "yyyyMMdd-HHmmss"
+        $transcriptPath = Join-Path `
+            -Path $logFolder `
+            -ChildPath "resourcegroup-$timestamp.log"
+
+        Start-Transcript -Path $transcriptPath
+
+        Write-Host "Starting Azure resource group processing."
+        Write-Verbose "Begin: Function processing has started."
+        Write-Verbose "Begin: Transcript logging has started."
+        Write-Debug "Begin: Transcript path is $transcriptPath"
     }
-    catch {
-        Write-Debug "The Catch block received this error: $($_.Exception.Message)"
-        Write-Error "Failed to create the resource group: $($_.Exception.Message)"
+
+    process {
+        $processedCount++
+
+        # Determine the name for the current pipeline object.
+        if ($PSCmdlet.ParameterSetName -eq "ProjectID") {
+            $currentResourceGroupName = "RG-$ProjectID"
+        }
+        else {
+            $currentResourceGroupName = $ResourceGroupName
+        }
+
+        Write-Verbose "Process: Preparing '$currentResourceGroupName'."
+        Write-Verbose "Process: Validation succeeded for '$currentResourceGroupName'."
+        Write-Debug "Process: Parameter set is '$($PSCmdlet.ParameterSetName)'."
+
+        # Create a structured result for the current item.
+        $result = [PSCustomObject]@{
+            ResourceGroupName = $currentResourceGroupName
+            Location          = "centralus"
+            Status            = "Not Created"
+            Tags              = $Tags
+            Timestamp         = Get-Date
+        }
+
+        try {
+            if ($PSCmdlet.ShouldProcess(
+                    "Resource Group '$currentResourceGroupName'",
+                    "Create"
+                )) {
+                Write-Host "Creating Azure resource group: $currentResourceGroupName"
+                Write-Verbose "Process: Sending the creation request to Azure."
+
+                New-AzResourceGroup `
+                    -Name $currentResourceGroupName `
+                    -Location "centralus" `
+                    -Tags $Tags `
+                    -ErrorAction Stop | Out-Null
+
+                $createdCount++
+                $result.Status = "Created"
+
+                Write-Verbose "Process: Azure confirmed '$currentResourceGroupName'."
+                Write-Host "Resource group created successfully: $currentResourceGroupName"
+            }
+            else {
+                $skippedCount++
+                $result.Status = "Skipped"
+
+                Write-Warning "Creation was skipped for '$currentResourceGroupName'."
+            }
+        }
+        catch {
+            $errorCount++
+            $result.Status = "Error"
+
+            Write-Debug "Process: Error received: $($_.Exception.Message)"
+            Write-Error "Failed to create '$currentResourceGroupName': $($_.Exception.Message)"
+        }
+
+        # Return one result object for each processed item.
+        $result
     }
-    finally {
-        Write-Verbose "Final step: Completing the script and stopping the transcript."
-        Write-Debug "The Finally block will run regardless of success or failure."
-        Write-Host "Resource group creation attempt completed."
-        Write-Host "Transcript location: $transcriptPath"
+
+    end {
+        Write-Host ""
+        Write-Host "Summary of Resource Group Creation:"
+        Write-Host "-----------------------------------"
+        Write-Host "Total Records Processed: $processedCount"
+        Write-Host "Created: $createdCount"
+        Write-Host "Errors: $errorCount"
+        Write-Host "Skipped: $skippedCount"
+        Write-Host "Transcript Location: $transcriptPath"
+
+        Write-Verbose "End: Function processing has completed."
+        Write-Debug "End: Processed=$processedCount; Created=$createdCount; Errors=$errorCount; Skipped=$skippedCount"
+
         Stop-Transcript
     }
-
-    # Return the structured result object.
-    $result
 }
