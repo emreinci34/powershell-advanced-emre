@@ -1,0 +1,8 @@
+[2026-09-27 22:32:55] [Information] New-TestResourceGroup processing started.
+[2026-09-27 22:32:55] [Information] Validation succeeded for 'RG-2001'.
+[2026-09-27 22:32:55] [Warning] Creation was skipped for 'RG-2001'.
+[2026-09-27 22:32:55] [Information] Resource group processing completed.
+Total Records Processed: 1
+Created: 0
+Errors: 0
+Skipped: 1

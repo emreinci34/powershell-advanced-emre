@@ -23,3 +23,14 @@ I used `Test-ModuleManifest` to validate the file. PowerShell successfully displ
 I added `Export-ModuleMember` to the module file and configured it to export the base names of the scripts found in the `Public` folder. This allows the module to expose only the functions intended for administrators.
 
 After re-importing the module, I ran `Get-Command -Module NWTC.ResourceGroups`. PowerShell displayed only `New-TestResourceGroup`, confirming that the correct public function was exported.
+## Task 5: Create a Private Logging Function
+
+I created a private helper function named `Write-ModuleLog` and saved it in the module's `Private` folder. The helper accepts a message, log file path, and severity level. It creates the log folder when necessary and adds a timestamp and severity level to every entry.
+
+I updated `NWTC.ResourceGroups.psm1` so that it loads functions from both the `Private` and `Public` folders. Only functions stored in the `Public` folder are exported. I verified this by running `Get-Command -Module NWTC.ResourceGroups`. The output displayed `New-TestResourceGroup`, but the private `Write-ModuleLog` helper was not visible to the user.
+
+I replaced the transcript logging in `New-TestResourceGroup` with the private logging helper. The function now creates timestamped files in the module's `Logs` folder using the `New-TestResourceGroup-Log-yyyyMMdd-HHmmss.txt` naming format.
+
+I tested the function first with `-WhatIf`. The function skipped the Azure operation and recorded the validation, skipped operation, and execution summary in the log. I then created `RG-2001` successfully. The log recorded the function start, validation success, creation attempt, successful completion, and final statistics.
+
+This task showed me how a private helper can provide shared internal functionality without adding unnecessary commands to the module's public interface.
