@@ -34,3 +34,33 @@ I replaced the transcript logging in `New-TestResourceGroup` with the private lo
 I tested the function first with `-WhatIf`. The function skipped the Azure operation and recorded the validation, skipped operation, and execution summary in the log. I then created `RG-2001` successfully. The log recorded the function start, validation success, creation attempt, successful completion, and final statistics.
 
 This task showed me how a private helper can provide shared internal functionality without adding unnecessary commands to the module's public interface.
+## Task 6: Test the Module
+
+I tested each major feature of the `NWTC.ResourceGroups` module to verify that it operates correctly.
+
+### ResourceGroupName Test
+
+I tested the function with the `ResourceGroupName` parameter by using `lm5-emre-test-rg`. I first used `-WhatIf` to preview the operation and confirmed that the function reported the operation as skipped. I then ran the command without `-WhatIf`, and the resource group was created successfully in the Central US region.
+
+### ProjectID Test
+
+I tested the `ProjectID` parameter with the value `2002`. The function correctly applied the automatic naming convention and created a resource group named `RG-2002`.
+
+### Pipeline and Multiple-Value Test
+
+I sent the values `2003`, `2004`, and `2005` to the function through the PowerShell pipeline. The function processed each value individually and successfully created `RG-2003`, `RG-2004`, and `RG-2005`.
+
+The final execution summary reported:
+
+- Total records processed: 3
+- Resources created: 3
+- Errors: 0
+- Resources skipped: 0
+
+### Logging Test
+
+I reviewed the generated log file and confirmed that it contained the function start, validation results, creation attempts, successful operations, and final execution statistics. Each entry included a timestamp and severity level.
+
+I also verified that the log files were stored in the expected `NWTC.ResourceGroups\Logs` folder. The pipeline test created the log file `New-TestResourceGroup-Log-20260927-224018.txt`.
+
+All tested module features worked as expected. The module accepts both parameter sets, supports pipeline input and multiple values, returns structured results, reports execution statistics, and stores accurate log information in the correct location.

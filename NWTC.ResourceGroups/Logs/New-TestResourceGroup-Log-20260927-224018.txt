@@ -1,0 +1,15 @@
+[2026-09-27 22:40:18] [Information] New-TestResourceGroup processing started.
+[2026-09-27 22:40:18] [Information] Validation succeeded for 'RG-2003'.
+[2026-09-27 22:40:18] [Information] Attempting to create 'RG-2003'.
+[2026-09-27 22:40:19] [Information] Successfully created 'RG-2003'.
+[2026-09-27 22:40:19] [Information] Validation succeeded for 'RG-2004'.
+[2026-09-27 22:40:19] [Information] Attempting to create 'RG-2004'.
+[2026-09-27 22:40:20] [Information] Successfully created 'RG-2004'.
+[2026-09-27 22:40:21] [Information] Validation succeeded for 'RG-2005'.
+[2026-09-27 22:40:21] [Information] Attempting to create 'RG-2005'.
+[2026-09-27 22:40:22] [Information] Successfully created 'RG-2005'.
+[2026-09-27 22:40:22] [Information] Resource group processing completed.
+Total Records Processed: 3
+Created: 3
+Errors: 0
+Skipped: 0

@@ -1,0 +1,8 @@
+[2026-09-27 22:39:24] [Information] New-TestResourceGroup processing started.
+[2026-09-27 22:39:24] [Information] Validation succeeded for 'lm5-emre-test-rg'.
+[2026-09-27 22:39:24] [Warning] Creation was skipped for 'lm5-emre-test-rg'.
+[2026-09-27 22:39:24] [Information] Resource group processing completed.
+Total Records Processed: 1
+Created: 0
+Errors: 0
+Skipped: 1
