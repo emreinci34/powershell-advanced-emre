@@ -42,6 +42,12 @@ function New-TestResourceGroup {
     "2001", "2002", "2003" | New-TestResourceGroup -WhatIf
 
     Previews the creation of three resource groups without creating them.
+
+    .NOTES
+    Author: Emre Inci
+    Module: NWTC.ResourceGroups
+    Version: 1.0.0
+    Purpose: Provides safe and consistent Azure resource group creation.
     #>
 
     [CmdletBinding(

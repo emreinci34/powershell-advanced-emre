@@ -22,6 +22,22 @@ function Write-ModuleLog {
     Write-ModuleLog `
         -Message "Resource group processing started." `
         -Path "C:\Logs\New-TestResourceGroup-Log.txt"
+
+    Writes an informational entry to the specified log file.
+
+    .EXAMPLE
+    Write-ModuleLog `
+        -Message "Resource group creation failed." `
+        -Path "C:\Logs\New-TestResourceGroup-Log.txt" `
+        -Level "Error"
+
+    Writes an error entry to the specified log file.
+
+    .NOTES
+    Author: Emre Inci
+    Module: NWTC.ResourceGroups
+    Version: 1.0.0
+    Purpose: Provides private and consistent logging for module functions.
     #>
 
     [CmdletBinding()]

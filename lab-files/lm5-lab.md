@@ -64,3 +64,25 @@ I reviewed the generated log file and confirmed that it contained the function s
 I also verified that the log files were stored in the expected `NWTC.ResourceGroups\Logs` folder. The pipeline test created the log file `New-TestResourceGroup-Log-20260927-224018.txt`.
 
 All tested module features worked as expected. The module accepts both parameter sets, supports pipeline input and multiple values, returns structured results, reports execution statistics, and stores accurate log information in the correct location.
+## Task 7: Prepare for Distribution
+
+I prepared the `NWTC.ResourceGroups` module for future distribution by updating the project documentation and function headers.
+
+I updated the function README to describe the current `New-TestResourceGroup` features, parameters, pipeline support, structured output, execution statistics, safety controls, and private module logging.
+
+I updated the repository README to explain the purpose of the project, display the complete module structure, provide installation instructions, and include module usage and testing information.
+
+I created `Docs\README.md` as the main module documentation. It includes:
+
+- Module purpose
+- Module features
+- Directory structure
+- Requirements
+- Installation instructions
+- Usage examples
+- Output and logging information
+- Version and author information
+
+I also updated the comment-based help in both `New-TestResourceGroup` and `Write-ModuleLog`. The headers now include the author, module name, version, and function purpose.
+
+The module documentation identifies the current release as version `1.0.0` and provides the information an administrator would need to install, understand, test, and use the module.

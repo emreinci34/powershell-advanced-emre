@@ -1,104 +1,168 @@
 # PowerShell Advanced – Emre Inci
 
-This repository contains my lab work and PowerShell automation projects for the PowerShell Advanced course at Northeast Wisconsin Technical College.
+## Repository Purpose
 
-## Azure Resource Group Project
+This repository contains my work for the NWTC PowerShell Advanced course. It documents the development of a reusable Azure resource group function and its conversion into a structured PowerShell script module.
 
-The main project is the `New-TestResourceGroup` advanced PowerShell function. It creates Azure resource groups in the Central US region using reusable, safe, and scalable automation practices.
+The current module is named `NWTC.ResourceGroups` and provides the public `New-TestResourceGroup` command.
 
-The function supports:
+## Module Features
 
-- Resource group names or numeric project IDs
-- Automatic `RG-<ProjectID>` naming
-- Parameter sets
+- Standard PowerShell module structure
+- Public and private function separation
+- Module manifest with version information
+- Explicit public function exports
+- Resource group name and project ID parameter sets
+- Pipeline and multiple-value processing
+- `Begin`, `Process`, and `End` blocks
 - Parameter validation
-- Default and custom tags
-- Pipeline and bulk processing
-- Begin, Process, and End blocks
-- `-WhatIf` and `-Confirm`
-- Verbose and debug output
-- Error handling
-- Transcript logging
-- Structured object output
-- End-of-run execution statistics
+- Default and custom Azure tags
+- `-WhatIf`, `-Confirm`, and `-Verbose` support
+- Structured PowerShell output
+- Execution statistics
+- Private timestamped logging
+- Module testing and documentation
 
 ## Repository Structure
 
-### `create-resourcegroup`
-
-Contains the main PowerShell project:
-
-- `create-resourcegroup.ps1`
-- `create-resourcegroup.tests.ps1`
-- `README.md`
-
-### `lab-files`
-
-Contains documentation from each learning module:
-
-- `lm1-lab.md`
-- `lm2-lab.md`
-- `lm3-lab.md`
-- `lm4-lab.md`
-
-### `output`
-
-Contains timestamped transcript logs created during function execution.
-
-### `ResourceGroups.txt`
-
-Contains project IDs used to demonstrate bulk pipeline processing.
-
-## Example Usage
-
-Load the function:
-
-```powershell
-. .\create-resourcegroup\create-resourcegroup.ps1
+```text
+powershell-advanced-emre
+│
+├── NWTC.ResourceGroups
+│   ├── Docs
+│   ├── Logs
+│   ├── Private
+│   │   └── Write-ModuleLog.ps1
+│   ├── Public
+│   │   └── New-TestResourceGroup.ps1
+│   ├── Tests
+│   ├── NWTC.ResourceGroups.psd1
+│   └── NWTC.ResourceGroups.psm1
+│
+├── create-resourcegroup
+│   ├── create-resourcegroup.ps1
+│   ├── create-resourcegroup.tests.ps1
+│   └── README.md
+│
+├── lab-files
+│   ├── lm1-lab.md
+│   ├── lm2-lab.md
+│   ├── lm3-lab.md
+│   ├── lm4-lab.md
+│   └── lm5-lab.md
+│
+├── output
+├── ResourceGroups.txt
+└── README.md
 ```
 
-Create a resource group using a complete name:
+## Module Installation
+
+Clone the repository:
 
 ```powershell
-New-TestResourceGroup -ResourceGroupName "lm4-emre-example-rg"
+git clone https://github.com/emreinci34/powershell-advanced-emre.git
 ```
 
-Create a resource group using a project ID:
+Move into the repository:
+
+```powershell
+Set-Location .\powershell-advanced-emre
+```
+
+Import the module through its manifest:
+
+```powershell
+Import-Module .\NWTC.ResourceGroups\NWTC.ResourceGroups.psd1 -Force
+```
+
+Verify the exported command:
+
+```powershell
+Get-Command -Module NWTC.ResourceGroups
+```
+
+## Requirements
+
+- PowerShell 7.0 or later
+- Git
+- Az PowerShell module
+- An active Azure account
+- Permission to create Azure resource groups
+
+Authenticate to Azure:
+
+```powershell
+Connect-AzAccount
+```
+
+## Usage Examples
+
+Create a resource group with a complete name:
+
+```powershell
+New-TestResourceGroup `
+    -ResourceGroupName "lm5-emre-example-rg"
+```
+
+Create a resource group from a project ID:
 
 ```powershell
 New-TestResourceGroup -ProjectID 2001
 ```
 
-Process multiple project IDs:
+Process multiple project IDs through the pipeline:
 
 ```powershell
-"2001", "2002", "2003" | New-TestResourceGroup
-```
-
-Process values from a text file:
-
-```powershell
-Get-Content .\ResourceGroups.txt |
+"2001", "2002", "2003" |
     New-TestResourceGroup
 ```
 
 Preview an operation safely:
 
 ```powershell
-Get-Content .\ResourceGroups.txt |
-    New-TestResourceGroup -WhatIf
+New-TestResourceGroup -ProjectID 2004 -WhatIf
+```
+
+Display detailed runtime information:
+
+```powershell
+New-TestResourceGroup -ProjectID 2004 -Verbose
+```
+
+## Logging
+
+The private `Write-ModuleLog` helper stores timestamped log files in:
+
+```text
+NWTC.ResourceGroups\Logs
+```
+
+Log files use the following naming format:
+
+```text
+New-TestResourceGroup-Log-yyyyMMdd-HHmmss.txt
 ```
 
 ## Testing
 
-The project includes Pester tests that verify the function’s parameter sets, automatic naming behavior, Azure location, and expected resource group configuration.
+The module has been tested with:
 
-Run the tests with:
+- `ResourceGroupName`
+- `ProjectID`
+- Pipeline input
+- Multiple project IDs
+- `-WhatIf`
+- Verbose output
+- Structured results
+- Execution statistics
+- Log content and location
 
-```powershell
-Invoke-Pester .\create-resourcegroup\create-resourcegroup.tests.ps1
-```
+## Version
 
-## Learning Outcome
+Current module version: `1.0.0`
 
-This project demonstrates how advanced PowerShell functions can make cloud administration safer, more consistent, reusable, testable, and ready for future module development.
+## Author
+
+Emre Inci
+NWTC IT – Systems Administration
