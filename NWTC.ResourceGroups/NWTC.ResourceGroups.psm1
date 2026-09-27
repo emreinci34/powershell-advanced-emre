@@ -7,3 +7,5 @@ $publicFunctions = Get-ChildItem `
 foreach ($function in $publicFunctions) {
     . $function.FullName
 }
+# Export only the functions stored in the Public folder.
+Export-ModuleMember -Function $publicFunctions.BaseName

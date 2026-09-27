@@ -18,3 +18,8 @@ I imported the module with `Import-Module` and verified the result with `Get-Com
 I created a module manifest named `NWTC.ResourceGroups.psd1` for the module. The manifest identifies the module as version `1.0.0`, lists me as the author, and includes a short description of the module's purpose.
 
 I used `Test-ModuleManifest` to validate the file. PowerShell successfully displayed the module name, version, author, and description, confirming that the manifest was created correctly.
+## Task 4: Export Module Members
+
+I added `Export-ModuleMember` to the module file and configured it to export the base names of the scripts found in the `Public` folder. This allows the module to expose only the functions intended for administrators.
+
+After re-importing the module, I ran `Get-Command -Module NWTC.ResourceGroups`. PowerShell displayed only `New-TestResourceGroup`, confirming that the correct public function was exported.
