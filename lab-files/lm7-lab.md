@@ -34,3 +34,12 @@ The `CompanyBaseline` configuration compiled successfully and generated the `loc
 I applied the MOF file using `Start-DscConfiguration`. DSC created the `C:\Automation` directory first and then created `C:\Automation\Config.txt` with the required content.
 
 `Test-DscConfiguration` returned `True`, confirming that the server matched the desired configuration. `Get-DscConfiguration` displayed both the `AutomationFolder` and `ConfigFile` resources as part of the active `CompanyBaseline` configuration.
+## Task 2: Create My First DSC Configuration
+
+I created a new DSC configuration file named `lm7-dsc.ps1` in the `DSC` folder.
+
+The configuration is named `EmreBaseline` and targets the `localhost` node. I used the `WindowsFeature` DSC resource, which is different from the `File` resources used in the Task 1 example.
+
+The `IISWebServer` resource requires the `Web-Server` Windows feature to be present. When this configuration is compiled and applied, DSC will install IIS if it is not already installed.
+
+I verified the script in Windows PowerShell and confirmed that `EmreBaseline` was successfully recognized as a DSC configuration.
