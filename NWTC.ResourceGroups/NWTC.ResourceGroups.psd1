@@ -3,7 +3,7 @@
     RootModule = 'NWTC.ResourceGroups.psm1'
 
     # Module version.
-    ModuleVersion = '1.0.0'
+    ModuleVersion = '1.1.0'
 
     # Unique module identifier.
     GUID = '21ba6f5f-9a3d-4d1f-9492-df24bf6daf73'

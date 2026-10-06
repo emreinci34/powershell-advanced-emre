@@ -28,3 +28,12 @@ The function uses `Get-AzResourceGroup` to retrieve Azure resource groups from t
 I added `Get-ResourceGroupSummary` to the module manifest's `FunctionsToExport` list. After reimporting the module, `Get-Command -Module NWTC.ResourceGroups` displayed both `Get-ResourceGroupSummary` and `New-TestResourceGroup`.
 
 I tested the new function with the `-Verbose` parameter. It successfully retrieved the resource groups and displayed their names, locations, and tags in a formatted table.
+## Task 3: Update Module Version
+
+I updated the `NWTC.ResourceGroups` module version from `1.0.0` to `1.1.0` in the module manifest.
+
+This change qualifies as a minor version update because the module gained a new backward-compatible public function named `Get-ResourceGroupSummary`. The existing `New-TestResourceGroup` function remains available and its existing functionality was not removed or intentionally broken.
+
+A patch version would normally be used only for backward-compatible bug fixes. A major version would be appropriate if the update introduced breaking changes that required users to modify their existing commands or automation.
+
+I validated the updated manifest with `Test-ModuleManifest`. The output confirmed version `1.1.0` and showed both exported functions.
