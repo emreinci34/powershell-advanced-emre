@@ -20,6 +20,7 @@
     # Public commands available to users.
     FunctionsToExport = @(
         'New-TestResourceGroup'
+        'Get-ResourceGroupSummary'
     )
 
     # This module does not export cmdlets, variables, or aliases.

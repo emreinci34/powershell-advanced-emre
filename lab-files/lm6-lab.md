@@ -15,3 +15,16 @@ I reviewed the existing `NWTC.ResourceGroups.psd1` module manifest to establish 
 I used `Test-ModuleManifest` to validate the manifest and display its current metadata. The manifest was valid and confirmed that version `1.0.0` exports the `New-TestResourceGroup` function.
 
 This baseline will make it possible to track the new features, documentation updates, and version changes introduced during LM6.
+## Task 2: Add a New Feature
+
+I created a new public function named `Get-ResourceGroupSummary` and stored it in the module's `Public` folder.
+
+The function uses `Get-AzResourceGroup` to retrieve Azure resource groups from the current subscription. It returns a structured object containing:
+
+- Resource group name
+- Azure location
+- Resource tags
+
+I added `Get-ResourceGroupSummary` to the module manifest's `FunctionsToExport` list. After reimporting the module, `Get-Command -Module NWTC.ResourceGroups` displayed both `Get-ResourceGroupSummary` and `New-TestResourceGroup`.
+
+I tested the new function with the `-Verbose` parameter. It successfully retrieved the resource groups and displayed their names, locations, and tags in a formatted table.
