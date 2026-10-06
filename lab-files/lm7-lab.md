@@ -64,3 +64,11 @@ The MOF file identifies the configuration as `EmreBaseline`. It contains a `Wind
 The resource specifies `Name = "Web-Server"` and `Ensure = "Present"`. This means that DSC should verify that the IIS Web Server feature is installed on the local server and install it if necessary.
 
 I also observed that the resource uses the `PSDesiredStateConfiguration` module and that the MOF file includes configuration metadata used by DSC during deployment.
+
+## Task 4: Apply the Configuration
+
+I applied the `EmreBaseline` MOF file by using `Start-DscConfiguration` with the `-Wait` and `-Verbose` parameters.
+
+The Local Configuration Manager processed the `[WindowsFeature]IISWebServer` resource and successfully installed the `Web-Server` feature. The configuration job completed in approximately 199 seconds.
+
+I verified the installation with `Get-WindowsFeature Web-Server`, which showed the IIS Web Server feature with an installation state of `Installed`.
