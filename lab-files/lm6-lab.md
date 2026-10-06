@@ -37,3 +37,12 @@ This change qualifies as a minor version update because the module gained a new 
 A patch version would normally be used only for backward-compatible bug fixes. A major version would be appropriate if the update introduced breaking changes that required users to modify their existing commands or automation.
 
 I validated the updated manifest with `Test-ModuleManifest`. The output confirmed version `1.1.0` and showed both exported functions.
+## Task 4: Create a Changelog
+
+I created `CHANGELOG.md` in the `NWTC.ResourceGroups/Docs` folder to document the module's release history.
+
+The changelog records version `1.0.0` as the initial release. It documents the original `New-TestResourceGroup` function, parameter sets, pipeline support, execution statistics, safety controls, and module logging.
+
+The changelog also records version `1.1.0`. This release adds the public `Get-ResourceGroupSummary` function, updates the module documentation and manifest, and improves module import and command testing.
+
+Maintaining a changelog gives administrators a clear record of what was added or changed in each release.
