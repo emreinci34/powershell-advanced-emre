@@ -80,3 +80,13 @@ I used `Test-DscConfiguration` to verify whether the server still matched the de
 I then used `Get-DscConfiguration` to review the configuration currently applied to the server. The output showed the `[WindowsFeature]IISWebServer` resource from the `PSDesiredStateConfiguration` module.
 
 The resource had the name `Web-Server` and an `Ensure` value of `Present`, confirming that the IIS Web Server feature was installed and matched the desired state.
+
+## Task 6: Expand the Baseline
+
+I expanded the `EmreBaseline` configuration by adding a second DSC resource named `[File]BaselineFolder`. This resource uses a destination path of `C:\EmreBaseline`, a type of `Directory`, and an `Ensure` value of `Present`.
+
+I recompiled the configuration and generated an updated `localhost.mof` file. The updated MOF contained both the `[WindowsFeature]IISWebServer` resource and the new `[File]BaselineFolder` resource.
+
+I redeployed the configuration with `Start-DscConfiguration`. DSC detected that IIS was already installed, so it skipped making an unnecessary change to that resource. It then created the missing `C:\EmreBaseline` directory.
+
+I verified the directory with `Test-Path`, which returned `True`. I also ran `Test-DscConfiguration`, which returned `True`, and used `Get-DscConfiguration` to confirm that both resources were present and compliant.

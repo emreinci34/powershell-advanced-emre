@@ -9,5 +9,12 @@ Configuration EmreBaseline
             Name   = "Web-Server"
             Ensure = "Present"
         }
+
+        File BaselineFolder
+        {
+            DestinationPath = "C:\EmreBaseline"
+            Type            = "Directory"
+            Ensure          = "Present"
+        }
     }
 }
