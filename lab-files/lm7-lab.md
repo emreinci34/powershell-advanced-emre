@@ -43,3 +43,24 @@ The configuration is named `EmreBaseline` and targets the `localhost` node. I us
 The `IISWebServer` resource requires the `Web-Server` Windows feature to be present. When this configuration is compiled and applied, DSC will install IIS if it is not already installed.
 
 I verified the script in Windows PowerShell and confirmed that `EmreBaseline` was successfully recognized as a DSC configuration.
+## Task 3: Generate and Review MOF Files
+
+I compiled the `EmreBaseline` DSC configuration and generated a MOF file for the `localhost` node.
+
+### File Location
+
+The generated MOF file is located at:
+
+`C:\powershell-advanced-emre\DSC\EmreBaseline\localhost.mof`
+
+### File Purpose
+
+The MOF file is the compiled version of the DSC configuration. It contains the desired system settings in a format that the Local Configuration Manager can read and apply to the target node.
+
+### Information Observed
+
+The MOF file identifies the configuration as `EmreBaseline`. It contains a `WindowsFeature` resource with the resource ID `[WindowsFeature]IISWebServer`.
+
+The resource specifies `Name = "Web-Server"` and `Ensure = "Present"`. This means that DSC should verify that the IIS Web Server feature is installed on the local server and install it if necessary.
+
+I also observed that the resource uses the `PSDesiredStateConfiguration` module and that the MOF file includes configuration metadata used by DSC during deployment.
