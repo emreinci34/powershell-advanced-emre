@@ -64,3 +64,14 @@ I used `Get-Module NWTC.ResourceGroups` to verify the loaded module. The output 
 I then used `Get-Command -Module NWTC.ResourceGroups` to verify the exported commands. Both `Get-ResourceGroupSummary` and `New-TestResourceGroup` were available and reported version `1.1.0`.
 
 Finally, I ran `Get-ResourceGroupSummary` with verbose output. The function successfully retrieved the Azure resource groups and displayed their resource group names, locations, and tags. These results confirmed that the module upgrade and the new public function were working correctly.
+## Task 7: Publish and Distribute
+
+I prepared version `1.1.0` of the `NWTC.ResourceGroups` module for organizational deployment.
+
+I updated the repository README, the public function README, and the module README. The documentation now describes both public functions, version `1.1.0`, import and verification commands, upgrade instructions, requirements, troubleshooting, and release information.
+
+I created a `Releases` folder inside `NWTC.ResourceGroups`. I then packaged the complete module as:
+
+`NWTC.ResourceGroups/Releases/NWTC.ResourceGroups1.1.0.zip`
+
+The package contains the module manifest, script module, public and private functions, documentation, tests, and supporting folders. The completed archive can be distributed to administrators for installation and deployment.

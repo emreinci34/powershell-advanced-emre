@@ -1,8 +1,21 @@
+# NWTC.ResourceGroups Public Functions
+
+## Purpose
+
+The `NWTC.ResourceGroups` module provides public PowerShell functions for creating and reporting on Azure resource groups.
+
+Current module version: `1.1.0`
+
+## Public Functions
+
+- `New-TestResourceGroup`
+- `Get-ResourceGroupSummary`
+
 # New-TestResourceGroup
 
 ## Purpose
 
-`New-TestResourceGroup` is a reusable advanced PowerShell function that creates Azure resource groups in the Central US region. The function is included as the public command in the `NWTC.ResourceGroups` module.
+`New-TestResourceGroup` is a reusable advanced PowerShell function that creates Azure resource groups in the Central US region.
 
 It provides multiple naming methods, pipeline support, safety controls, validation, structured output, execution statistics, and timestamped module logging.
 
@@ -10,32 +23,34 @@ It provides multiple naming methods, pipeline support, safety controls, validati
 
 - Creates Azure resource groups in the `centralus` region.
 - Provides `ResourceGroupName` and `ProjectID` parameter sets.
-- Automatically converts a project ID into the `RG-<ProjectID>` format.
-- Accepts multiple project IDs through the PowerShell pipeline.
+- Converts project IDs into the `RG-<ProjectID>` format.
+- Accepts multiple project IDs through the pipeline.
 - Supports `-WhatIf` and `-Confirm`.
+- Supports `-Verbose` and `-Debug`.
 - Validates resource group names and project IDs.
 - Applies default or custom Azure tags.
 - Uses `Begin`, `Process`, and `End` blocks.
-- Returns one structured object for every processed resource group.
-- Displays processed, created, skipped, and error counts.
-- Uses the private `Write-ModuleLog` helper for timestamped logging.
+- Returns structured objects.
+- Reports processed, created, skipped, and failed resources.
+- Uses the private `Write-ModuleLog` helper.
 
 ## Parameters
 
 ### ResourceGroupName
 
-Specifies the complete name of the Azure resource group. The value must contain between 1 and 90 characters.
+Specifies a complete Azure resource group name containing between 1 and 90 characters.
 
 ```powershell
-New-TestResourceGroup -ResourceGroupName "lm5-emre-production-rg"
+New-TestResourceGroup `
+    -ResourceGroupName "lm6-emre-example-rg"
 ```
 
 ### ProjectID
 
-Specifies a numeric project ID between 1 and 999999. The function automatically formats the resource group name as `RG-<ProjectID>`.
+Specifies a numeric project ID between 1 and 999999. The function creates a name using the `RG-<ProjectID>` format.
 
 ```powershell
-New-TestResourceGroup -ProjectID 2001
+New-TestResourceGroup -ProjectID 2006
 ```
 
 ### Tags
@@ -51,59 +66,41 @@ Specifies Azure tags as a hashtable. The default tags are:
 
 ## Pipeline Usage
 
-The `ProjectID` parameter accepts pipeline input. Multiple projects can be processed during one execution:
-
 ```powershell
-"2001", "2002", "2003" | New-TestResourceGroup
+"2006", "2007", "2008" |
+    New-TestResourceGroup
 ```
 
-The command creates:
-
-- `RG-2001`
-- `RG-2002`
-- `RG-2003`
-
-Project IDs can also be read from a text file:
+Use a text file for bulk processing:
 
 ```powershell
 Get-Content .\ResourceGroups.txt |
     New-TestResourceGroup
 ```
 
-## Custom Tags
-
-```powershell
-New-TestResourceGroup `
-    -ProjectID 2004 `
-    -Tags @{
-        Department  = "Infrastructure"
-        Environment = "Development"
-    }
-```
-
 ## Safe Testing
 
-Use `-WhatIf` to preview an operation without creating the resource group:
+Preview creation without changing Azure:
 
 ```powershell
-New-TestResourceGroup -ProjectID 2005 -WhatIf
+New-TestResourceGroup -ProjectID 2006 -WhatIf
 ```
 
-Use `-Confirm` when interactive approval is required:
+Request interactive approval:
 
 ```powershell
-New-TestResourceGroup -ProjectID 2005 -Confirm
+New-TestResourceGroup -ProjectID 2006 -Confirm
 ```
 
-Use `-Verbose` to display detailed runtime information:
+Display detailed runtime information:
 
 ```powershell
-New-TestResourceGroup -ProjectID 2005 -Verbose
+New-TestResourceGroup -ProjectID 2006 -Verbose
 ```
 
 ## Output
 
-The function returns a `PSCustomObject` for each processed resource group. Each object contains:
+The function returns one `PSCustomObject` for each resource group. Each object contains:
 
 - `ResourceGroupName`
 - `Location`
@@ -111,37 +108,97 @@ The function returns a `PSCustomObject` for each processed resource group. Each 
 - `Tags`
 - `Timestamp`
 
-At the end of execution, the function displays:
+The function also displays final execution statistics and the log file location.
 
-- Total records processed
-- Resources created
-- Errors encountered
-- Resources skipped
-- Log file location
+# Get-ResourceGroupSummary
 
-## Logging
+## Purpose
 
-The function uses the private `Write-ModuleLog` helper. Timestamped log files are stored in the module's `Logs` folder with the following naming format:
+`Get-ResourceGroupSummary` retrieves Azure resource groups from the current subscription and produces a structured summary.
 
-```text
-New-TestResourceGroup-Log-yyyyMMdd-HHmmss.txt
+## Features
+
+- Retrieves Azure resource groups using `Get-AzResourceGroup`.
+- Displays resource group name, location, and tags.
+- Returns structured PowerShell objects.
+- Supports the common `-Verbose` parameter.
+- Includes error handling for failed Azure requests.
+
+## Usage
+
+Display all resource group summaries:
+
+```powershell
+Get-ResourceGroupSummary
 ```
 
-Logs include validation results, creation attempts, successful operations, skipped operations, errors, and final statistics.
+Display detailed processing information:
 
-## Requirements
+```powershell
+Get-ResourceGroupSummary -Verbose
+```
+
+Format the results as a table:
+
+```powershell
+Get-ResourceGroupSummary |
+    Format-Table ResourceGroupName, Location, Tags -AutoSize
+```
+
+## Output
+
+Each returned object contains:
+
+- `ResourceGroupName`
+- `Location`
+- `Tags`
+
+Resource groups without tags may display an empty tag value.
+
+# Logging
+
+`New-TestResourceGroup` uses the private `Write-ModuleLog` helper. Timestamped logs are stored in the module's `Logs` folder.
+
+# Requirements
 
 - PowerShell 7.0 or later
 - Az PowerShell module
 - An authenticated Azure session
-- Permission to create Azure resource groups
+- Permission to view or create Azure resource groups
 
-Connect to Azure before running the function:
+Connect to Azure when necessary:
 
 ```powershell
 Connect-AzAccount
 ```
 
-## Module Version
+# Import and Verification
 
-Current module version: `1.0.0`
+Import the module:
+
+```powershell
+Import-Module `
+    .\NWTC.ResourceGroups\NWTC.ResourceGroups.psd1 `
+    -Force
+```
+
+Verify version `1.1.0`:
+
+```powershell
+Get-Module NWTC.ResourceGroups |
+    Select-Object Name, Version, Path
+```
+
+Display public commands:
+
+```powershell
+Get-Command -Module NWTC.ResourceGroups
+```
+
+# Version 1.1.0 Changes
+
+- Added `Get-ResourceGroupSummary`.
+- Added resource group reporting for name, location, and tags.
+- Updated documentation.
+- Improved module testing.
+- Added changelog and release notes.
