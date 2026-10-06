@@ -46,3 +46,12 @@ The changelog records version `1.0.0` as the initial release. It documents the o
 The changelog also records version `1.1.0`. This release adds the public `Get-ResourceGroupSummary` function, updates the module documentation and manifest, and improves module import and command testing.
 
 Maintaining a changelog gives administrators a clear record of what was added or changed in each release.
+## Task 5: Create Release Notes
+
+I created `RELEASENOTES.md` in the `NWTC.ResourceGroups/Docs` folder to communicate the changes included in version `1.1.0`.
+
+The release notes contain sections for new features, bug fixes, upgrade instructions, known issues, and compatibility. They explain the new `Get-ResourceGroupSummary` function and provide commands for removing the previous module, importing the updated manifest, verifying the installed version, and checking the exported commands.
+
+The known issues section documents the requirements for the Az PowerShell module, an authenticated Azure connection, suitable Azure permissions, and network availability.
+
+I also updated the `ReleaseNotes` value in the module manifest so that its metadata accurately describes version `1.1.0`.

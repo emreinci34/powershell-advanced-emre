@@ -40,7 +40,7 @@
 
             ProjectUri = 'https://github.com/emreinci34/powershell-advanced-emre'
 
-            ReleaseNotes = 'Initial module release with resource group creation, pipeline processing, execution statistics, and module logging.'
+            ReleaseNotes = 'Version 1.1.0 adds Get-ResourceGroupSummary, updated documentation, improved testing, a changelog, and detailed release notes.'
         }
     }
 }
