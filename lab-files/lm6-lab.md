@@ -55,3 +55,12 @@ The release notes contain sections for new features, bug fixes, upgrade instruct
 The known issues section documents the requirements for the Az PowerShell module, an authenticated Azure connection, suitable Azure permissions, and network availability.
 
 I also updated the `ReleaseNotes` value in the module manifest so that its metadata accurately describes version `1.1.0`.
+## Task 6: Test the Upgrade
+
+I removed the previously loaded module and imported the updated `NWTC.ResourceGroups.psd1` manifest with the `-Force` parameter.
+
+I used `Get-Module NWTC.ResourceGroups` to verify the loaded module. The output confirmed that version `1.1.0` was imported from the expected module path.
+
+I then used `Get-Command -Module NWTC.ResourceGroups` to verify the exported commands. Both `Get-ResourceGroupSummary` and `New-TestResourceGroup` were available and reported version `1.1.0`.
+
+Finally, I ran `Get-ResourceGroupSummary` with verbose output. The function successfully retrieved the Azure resource groups and displayed their resource group names, locations, and tags. These results confirmed that the module upgrade and the new public function were working correctly.
