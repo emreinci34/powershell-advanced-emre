@@ -72,3 +72,11 @@ I applied the `EmreBaseline` MOF file by using `Start-DscConfiguration` with the
 The Local Configuration Manager processed the `[WindowsFeature]IISWebServer` resource and successfully installed the `Web-Server` feature. The configuration job completed in approximately 199 seconds.
 
 I verified the installation with `Get-WindowsFeature Web-Server`, which showed the IIS Web Server feature with an installation state of `Installed`.
+
+## Task 5: Validate Compliance
+
+I used `Test-DscConfiguration` to verify whether the server still matched the desired configuration. The command returned  `True`, confirming that the system was compliant with the `EmreBaseline` configuration.
+
+I then used `Get-DscConfiguration` to review the configuration currently applied to the server. The output showed the `[WindowsFeature]IISWebServer` resource from the `PSDesiredStateConfiguration` module.
+
+The resource had the name `Web-Server` and an `Ensure` value of `Present`, confirming that the IIS Web Server feature was installed and matched the desired state.
